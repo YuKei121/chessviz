@@ -1,8 +1,8 @@
-#ifndef BoardPrintPlain_H
-#define BoardPrintPlain_H
+#ifndef Board_H
+#define Board_H
 #include <stdlib.h>
 
-void board_read(char board[8][8]);
+void move(char board[8][8]);
 
 #endif
 

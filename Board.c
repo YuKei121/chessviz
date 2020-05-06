@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int board_read(char board[8][8])
+void move(char board[8][8])
 {
 	char c[6];
 	char figure;
@@ -47,3 +47,4 @@ int board_read(char board[8][8])
 	}
 	board[y][x] = figure;
 }
+
