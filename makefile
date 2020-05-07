@@ -1,7 +1,7 @@
 all:
-	gcc -Wall -Werror -c BoardPrintPlain.c
-	gcc -Wall -Werror -c Board.c
-	gcc -Wall -Werror -c main.c
-	gcc main.o Board.o BoardPrintPlain.o -o test
+	gcc -Wall -Werror -o build/BoardPrintPlain.o -c src/BoardPrintPlain.c -lm
+	gcc -Wall -Werror -o build/Board.o -c src/Board.c -lm
+	gcc -Wall -Werror -o build/main.o -c src/main.c -lm
+	gcc build/main.o build/Board.o build/BoardPrintPlain.o -o bin/test -lm
 clean:
 	rm -rf *.o
