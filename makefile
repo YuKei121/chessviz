@@ -4,4 +4,4 @@ all:
 	gcc -Wall -Werror -o build/main.o -c src/main.c -lm
 	gcc build/main.o build/Board.o build/BoardPrintPlain.o -o bin/test -lm
 clean:
-	rm -rf *.o
+	rm -rf build/*.o bin/test
