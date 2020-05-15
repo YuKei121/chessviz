@@ -5,6 +5,7 @@
 
 int main()
 {
+	system("clear");
     char board[8][8] = {{"rnbqkbnr"},
                         {"pppppppp"},
                         {"        "},
@@ -13,11 +14,12 @@ int main()
                         {"        "},
                         {"PPPPPPPP"},
                         {"RNBQKBNR"}};
-    board_print(board);
     int ShowMustGoOn;
     do {
-    ShowMustGoOn = move(board);
     board_print(board);
+    ShowMustGoOn = move(board);
     } while (ShowMustGoOn != 1);
+    board_print(board);
+    printf("Игра окончена!\n");
     return 0;
 }

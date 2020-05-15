@@ -126,6 +126,7 @@ int move(char board[8][8])
     int gameover = 0;
     fgets(c, 9, stdin);
     int x, y, x1, y1;
+    system("clear");
     if (check_writing(c))
             return -1;
 
@@ -299,10 +300,8 @@ int move(char board[8][8])
     player_move = -1;
     player_def = -1;
     move_type = 0;
-    if (gameover == 1) {
-        printf("Игра окончена!\n");
+    if (gameover == 1)
 	return 1;
-    }
     return 0;
 }
 
