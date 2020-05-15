@@ -14,7 +14,10 @@ int main()
                         {"PPPPPPPP"},
                         {"RNBQKBNR"}};
     board_print(board);
-    move(board);
+    int ShowMustGoOn;
+    do {
+    ShowMustGoOn = move(board);
     board_print(board);
+    } while (ShowMustGoOn != 1);
     return 0;
 }

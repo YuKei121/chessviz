@@ -299,8 +299,10 @@ int move(char board[8][8])
     player_move = -1;
     player_def = -1;
     move_type = 0;
-    if (gameover == 1)
+    if (gameover == 1) {
         printf("Игра окончена!\n");
+	return 1;
+    }
     return 0;
 }
 
