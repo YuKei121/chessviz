@@ -26,23 +26,15 @@ int player(char figure)
 
 int print_type(char c[9])
 {
-    switch (c[0]) {
-    case 'p':
-    case 'q':
-    case 'k':
-    case 'r':
-    case 'b':
-    case 'n':
-    case 'P':
-    case 'Q':
-    case 'K':
-    case 'R':
-    case 'B':
-    case 'N':
-        return 1;
-    default:
+    if ((strlen(c) == 6) && (c[5] != '#'))
         return 0;
-    }
+    if ((strlen(c) == 7) && (c[5] == '#'))
+        return 0;
+    if ((strlen(c) == 7) && (c[5] != '#'))
+        return 1;
+    if ((strlen(c) == 8) && (c[6] == '#'))
+        return 1;
+    return -1;
 }
 
 int letter_check(char c)
@@ -125,6 +117,10 @@ int move(char board[8][8])
     fgets(c, 9, stdin);
     int x, y, x1, y1;
     system("clear");
+    if (print_type(c) == -1) {
+        printf("Неверный ввод!\n");
+        return -1;
+    }
     if (check_writing(c))
         return -1;
 
