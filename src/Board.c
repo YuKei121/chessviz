@@ -95,10 +95,8 @@ int check_writing(char c[9])
             return -1;
         }
         return 0;
-    }
-    else
-    {
-	    if ((c[3] != '-') && (c[3] != 'x')) {
+    } else {
+        if ((c[3] != '-') && (c[3] != 'x')) {
             printf("Неверный ввод!\n");
             return -1;
         }
@@ -128,7 +126,7 @@ int move(char board[8][8])
     int x, y, x1, y1;
     system("clear");
     if (check_writing(c))
-            return -1;
+        return -1;
 
     if (print_type(c) == 0) {
         for (int i = 0; i < 5; i++) {
@@ -197,10 +195,8 @@ int move(char board[8][8])
                     gameover = 1;
             }
         }
-    }
-    else
-    {
-	    for (int i = 1; i < 6; i++) {
+    } else {
+        for (int i = 1; i < 6; i++) {
             if ((c[i] != '-') && (c[i] != 'x')) {
                 switch (c[i]) {
                 case 'a':
@@ -262,10 +258,10 @@ int move(char board[8][8])
                 x1 = x;
                 y1 = y;
                 figure = board[y1][x1];
-		if (figure != c[0]) {
-			printf("Указанная фигура не совпадает с действительной!\n");
-			return -1;
-		}
+                if (figure != c[0]) {
+                    printf("Указанная фигура не совпадает с действительной!\n");
+                    return -1;
+                }
                 if (c[6] == '#')
                     gameover = 1;
             }
@@ -301,7 +297,7 @@ int move(char board[8][8])
     player_def = -1;
     move_type = 0;
     if (gameover == 1)
-	return 1;
+        return 1;
     return 0;
 }
 
