@@ -2,75 +2,215 @@
 #include <stdlib.h>
 #include <string.h>
 
-void move(char board[8][8])
+int player(char figure)
 {
-    char c[6];
-    char figure;
-    fgets(c, 6, stdin);
-    int x, y;
-    for (int i = 0; i < strlen(c); i++) {
-        if (c[2] != '-') {
-            printf("Incorrect input!\n");
-            break;
+    switch (figure) {
+    case 'p':
+    case 'q':
+    case 'k':
+    case 'r':
+    case 'b':
+    case 'n':
+        return 0;
+    case 'P':
+    case 'Q':
+    case 'K':
+    case 'R':
+    case 'B':
+    case 'N':
+        return 1;
+    default:
+        return 2;
+    }
+}
+
+int print_type(char c[9])
+{
+    switch (c[0]) {
+    case 'p':
+    case 'q':
+    case 'k':
+    case 'r':
+    case 'b':
+    case 'n':
+    case 'P':
+    case 'Q':
+    case 'K':
+    case 'R':
+    case 'B':
+    case 'N':
+        return 1;
+    default:
+        return 0;
+    }
+}
+
+int letter_check(char c)
+{
+    switch (c) {
+    case 'a':
+    case 'b':
+    case 'c':
+    case 'd':
+    case 'e':
+    case 'f':
+    case 'g':
+    case 'h':
+        return 1;
+    default:
+        return 0;
+    }
+}
+
+int number_check(char c)
+{
+    switch (c) {
+    case '1':
+    case '2':
+    case '3':
+    case '4':
+    case '5':
+    case '6':
+    case '7':
+    case '8':
+        return 1;
+    default:
+        return 0;
+    }
+}
+
+int check_writing_figureless(char c[9])
+{
+    if (print_type(c) == 0) {
+        if ((c[2] != '-') && (c[2] != 'x')) {
+            printf("Неверный ввод!\n");
+            return -1;
         }
-        if (c[i] != '-') {
-            switch (c[i]) {
-            case 'a':
-                x = 0;
-                break;
-            case 'b':
-                x = 1;
-                break;
-            case 'c':
-                x = 2;
-                break;
-            case 'd':
-                x = 3;
-                break;
-            case 'e':
-                x = 4;
-                break;
-            case 'f':
-                x = 5;
-                break;
-            case 'g':
-                x = 6;
-                break;
-            case 'h':
-                x = 7;
-                break;
-            case '1':
-                y = 0;
-                break;
-            case '2':
-                y = 1;
-                break;
-            case '3':
-                y = 2;
-                break;
-            case '4':
-                y = 3;
-                break;
-            case '5':
-                y = 4;
-                break;
-            case '6':
-                y = 5;
-                break;
-            case '7':
-                y = 6;
-                break;
-            case '8':
-                y = 7;
-                break;
-            default:
-                printf("Incorrect input!\n");
+        if ((letter_check(c[0]) == 0) || (letter_check(c[3]) == 0)) {
+            printf("Неверный ввод!\n");
+            return -1;
+        }
+        if ((number_check(c[1]) == 0) || (number_check(c[4]) == 0)) {
+            printf("Неверный ввод!\n");
+            return -1;
+        }
+        return 0;
+    }
+    return -1;
+}
+
+int move(char board[8][8])
+{
+    char c[9];
+    char figure, figure2;
+    int move_type = -1;
+    int player_move = -1;
+    int player_def = -2;
+    int gameover = 0;
+    fgets(c, 9, stdin);
+    int x, y, x1, y1;
+
+    if (print_type(c) == 0) {
+        if (check_writing_figureless(c))
+            return -1;
+        for (int i = 0; i < 5; i++) {
+            if ((c[i] != '-') && (c[i] != 'x')) {
+                switch (c[i]) {
+                case 'a':
+                    x = 0;
+                    break;
+                case 'b':
+                    x = 1;
+                    break;
+                case 'c':
+                    x = 2;
+                    break;
+                case 'd':
+                    x = 3;
+                    break;
+                case 'e':
+                    x = 4;
+                    break;
+                case 'f':
+                    x = 5;
+                    break;
+                case 'g':
+                    x = 6;
+                    break;
+                case 'h':
+                    x = 7;
+                    break;
+                case '1':
+                    y = 0;
+                    break;
+                case '2':
+                    y = 1;
+                    break;
+                case '3':
+                    y = 2;
+                    break;
+                case '4':
+                    y = 3;
+                    break;
+                case '5':
+                    y = 4;
+                    break;
+                case '6':
+                    y = 5;
+                    break;
+                case '7':
+                    y = 6;
+                    break;
+                case '8':
+                    y = 7;
+                    break;
+                default:
+                    printf("Incorrect input!\n");
+                }
+            } else {
+                if (c[i] == 'x')
+                    move_type = 1;
+                else
+                    move_type = 0;
+                x1 = x;
+                y1 = y;
+                figure = board[y1][x1];
+                if (c[5] == '#')
+                    gameover = 1;
             }
-        } else {
-            figure = board[y][x];
-            board[y][x] = ' ';
         }
     }
+
+    figure2 = board[y][x];
+
+    if (figure == ' ') {
+        printf("В указанной ячейке нет фигуры!\n");
+        return -1;
+    }
+    player_move = player(figure);
+    player_def = player(figure2);
+    // printf("%d %d %c %c %d %d %d %d \n", player_move, player_def, figure,
+    // figure2, x1, y1, x, y);
+    if (player_move == player_def) {
+        printf("Нельзя атаковать свои фигуры!\n");
+        return -1;
+    } else {
+        if ((player_def == 2) && (move_type == 1)) {
+            printf("Неверный тип хода!\n");
+            return -1;
+        }
+        if ((move_type == 0) && (player_def != 2)) {
+            printf("Неверный тип хода!");
+            return -1;
+        }
+    }
+    board[y1][x1] = ' ';
     board[y][x] = figure;
+    player_move = -1;
+    player_def = -1;
+    move_type = 0;
+    if (gameover == 1)
+        printf("Game Over");
+    return 0;
 }
 
