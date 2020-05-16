@@ -15,9 +15,11 @@ int main()
                         {"PPPPPPPP"},
                         {"RNBQKBNR"}};
     int ShowMustGoOn;
+    char m[9];
     do {
         board_print(board);
-        ShowMustGoOn = move(board);
+	fgets(m, 9, stdin);
+        ShowMustGoOn = move(board, m);
     } while (ShowMustGoOn != 1);
     board_print(board);
     printf("Игра окончена!\n");

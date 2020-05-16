@@ -106,15 +106,13 @@ int check_writing(char c[9])
     return -1;
 }
 
-int move(char board[8][8])
+int move(char board[8][8], char c[9])
 {
-    char c[9];
     char figure, figure2;
     int move_type = -1;
     int player_move = -1;
     int player_def = -2;
     int gameover = 0;
-    fgets(c, 9, stdin);
     int x, y, x1, y1;
     system("clear");
     if (print_type(c) == -1) {
