@@ -80,3 +80,31 @@ CTEST(syntax, print_type_2_incorrect)
         int result = check_writing("z2e-e4");
         ASSERT_EQUAL(expected, result);
 }
+
+CTEST(syntax, move_correct)
+{
+	int expected = 0;
+	int result = move(board, "e2-e4");
+	ASSERT_EQUAL(expected, result);
+}
+
+CTEST(syntax, move_incorrect_no_figure)
+{
+        int expected = -1;
+        int result = move(board, "e4-e2");
+        ASSERT_EQUAL(expected, result);
+}
+
+CTEST(syntax, move_incorrect_wrong_figure)
+{
+        int expected = -1;
+        int result = move(board, "ke2-e4");
+        ASSERT_EQUAL(expected, result);
+}
+
+CTEST(syntax, move_incorrect_wrong_attack)
+{
+        int expected = -1;
+        int result = move(board, "pe2xe4");
+        ASSERT_EQUAL(expected, result);
+}
