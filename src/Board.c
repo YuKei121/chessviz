@@ -114,7 +114,6 @@ int move(char board[8][8], char c[9])
     int player_def = -2;
     int gameover = 0;
     int x, y, x1, y1;
-    system("clear");
     if (print_type(c) == -1) {
         printf("Неверный ввод!\n");
         return -1;

@@ -1,2 +1,4 @@
-bin/test
-build/*.o
+bin/chess
+bin/chesstest
+build/src/*.o
+build/test/*.o
