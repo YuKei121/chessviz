@@ -108,3 +108,19 @@ CTEST(syntax, move_incorrect_wrong_attack)
         int result = move(board, "pe2xe4");
         ASSERT_EQUAL(expected, result);
 }
+
+CTEST(syntax, move_incorrect_attack_self)
+{
+        int expected = -1;
+        int result = move(board, "pe2xe1");
+        ASSERT_EQUAL(expected, result);
+}
+
+CTEST(syntax, mate)
+{
+        int expected = 1;
+        int result = move(board, "e2-e4#");
+        ASSERT_EQUAL(expected, result);
+}
+
+
