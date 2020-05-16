@@ -9,4 +9,4 @@ all:
 	gcc -c -Wall -Werror -o build/test/chesstest.o test/chesstest.c -I thirdparty -I src
 	gcc -o bin/chesstest build/test/Board.o build/test/BoardPrintPlain.o build/test/main.o build/test/chesstest.o
 clean:
-	rm -rf build/*.o bin/test
+	rm -rf build/src/*.o build/test/*.o
